@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- HEADER -->
+<div th:insert="common/header.html" id="header"></div>
+
+<a th:href="@{/post}">글쓰기</a>
+
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer"></div>
+</body>
+</html>
+<!--
+    thymeleaf 문법:
+    - th:insert
+       - 헤더와 푸터처럼 다른 페이지를 현재 페이지에 삽입하는 역할을 한다.
+       - JSP의 include와 같다.
+    - th:href
+        - thymeleaf에서 html 속성은 대부분 이처럼 th: 으로 바꿔서 사용할 수 있다.
+        - @{ } 의 의미는 상대경로 이다.
+        - 예제에서 @{/post}는 URL이 http://localhost:7777/post 가 된.
+-->
