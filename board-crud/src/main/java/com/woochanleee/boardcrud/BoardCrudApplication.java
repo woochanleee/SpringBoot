@@ -5,7 +5,9 @@ import com.woochanleee.boardcrud.listener.StartedListener;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication; // SpringApplication 객체는 Spring 어플리케이션을 편리하게 구동하기 위한 클래스
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@EnableJpaAuditing // JPA Auditing 활성화를 위해 Application에서 @EnableJpaAuditing 어노테이션을 추가해준다.
 @SpringBootApplication // 한번에 Spring Boot Application을 실행할수 있는 어노테이션
 public class BoardCrudApplication {
 
