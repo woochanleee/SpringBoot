@@ -3,12 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
 <!-- HEADER -->
 <div th:insert="common/header.html" id="header"></div>
 
 <a th:href="@{/post}">글쓰기</a>
+
+<table>
+    <thead>
+        <tr>
+            <th class="one wide">번호</th>
+            <th class="ten wide">글제목</th>
+            <th class="two wide">작성자</th>
+            <th class="three wide">작성일</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <!-- CONTENTS !-->
+    <tr th:each="board: ${boardList}">
+        <td>
+            <span th:text="${board.id}"></span>
+        </td>
+        <td>
+            <a th:href="@{'/post/' + ${board.id}}">
+                <span th:text="${board.title}"></span>
+            </a>
+        </td>
+        <td>
+            <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <!-- FOOTER -->
 <div th:insert="common/footer.html" id="footer"></div>
@@ -23,4 +53,17 @@
         - thymeleaf에서 html 속성은 대부분 이처럼 th: 으로 바꿔서 사용할 수 있다.
         - @{ } 의 의미는 상대경로 이다.
         - 예제에서 @{/post}는 URL이 http://localhost:7777/post 가 된.
+    - <link rel="stylesheet" th:href="@{/css/board.css}">
+        - css, js, img 같은 정적파일들은 src/main/resources/static 경로에 저장하면 스프링부트가 자동으로 인식을 하게 된다.
+    - <tr th:each="board : ${boardList}">
+        - thymeleaf에서 반복문을 사용하는 문법이다.
+        - 컨트롤러가 넘겨주는 변수는 ${ } 으로 받을 수 있.
+        - 즉, boardList는 컨트롤러가 넘겨주는 변수이며, 원소는 board 변수로 사용하여 각 속성을 사용할 수 있다.
+    - <span th:text="${board.id}"></span>
+        - 변수 값을 escape 처리하여, 태그의 텍스트로 사용한다.
+    - <a th:href="@{'/post/' + ${board.id}}">
+        - 글 제목을 누르면 상세페이지로 이동하기 위해 path variable을 사용한다.
+    - <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+        - #temporals.format() 메서드를 사용하여 날짜를 포맷팅하는 방법이다.
+        - createdDate는 LocalDateTime 타입이기 때문에 java.util.Date를 사용하는 #dates.format()를 사용하지 않는다.
 -->
