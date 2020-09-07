@@ -4,16 +4,24 @@ import com.woochanleee.boardcrud.dto.BoardDto;
 import com.woochanleee.boardcrud.service.BoardService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class BoardController {
     private BoardService boardService;
 
+
+    /* 게시글 목록 */
     @GetMapping("/")
-    public String list() {
+    public String list(Model model) {
+        List<BoardDto> boardList = boardService.getBoardList();
+
+        model.addAttribute("boardList", boardList);
         return "board/list.html";
     }
 
@@ -47,4 +55,7 @@ public class BoardController {
     URL을 매핑해주는 어노테이션이며, HTTP Method에 맞는 어노테이션을 작성하면 된다.
 
     dto는 Controller와 Service 사이에서 데이터를 주고 받는 객체를 의미한다.
+
+    public String list(Model model) { ... }
+    - Model 객체를 통해 View에 데이터를 전달한다.
 */
