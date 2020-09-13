@@ -5,8 +5,7 @@ import com.woochanleee.boardcrud.service.BoardService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,8 +35,38 @@ public class BoardController {
 
         return "redirect:/";
     }
-}
 
+    @GetMapping("/post/{no}")
+    public String detail(@PathVariable("no") Long no, Model model) {
+        BoardDto boardDto = boardService.getPost(no);
+
+        model.addAttribute("boardDto", boardDto);
+        return "board/detail.html";
+    }
+
+    @GetMapping("/post/edit/{no}")
+    public String edit(@PathVariable("no") Long no, Model model) {
+        BoardDto boardDto = boardService.getPost(no);
+
+        model.addAttribute("boardDto", boardDto);
+        return "board/update.html";
+    }
+
+    @PutMapping("/post/edit/{no}")
+    public String update(BoardDto boardDto) {
+        System.out.println("what?");
+        boardService.savePost(boardDto);
+
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/post/{no}")
+    public void delete(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
+
+        return "redirect:/";
+    }
+}
 /*
     @Controller:
     - 컨트롤러임을 명시하는 어노테이션이다.
