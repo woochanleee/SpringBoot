@@ -26,12 +26,13 @@
     <!-- CONTENTS !-->
     <tr th:each="board: ${boardList}">
         <td>
-            <span th:text="${board.id}"></span>
+            <a th:href="@{'/post/' + ${board.id}}">
+                <span th:text="${board.id}"></span>
+            </a>
+
         </td>
         <td>
-            <a th:href="@{'/post/' + ${board.id}}">
-                <span th:text="${board.title}"></span>
-            </a>
+            <span th:text="${board.title}"></span>
         </td>
         <td>
             <span th:text="${board.writer}" />
