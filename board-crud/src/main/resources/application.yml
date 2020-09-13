@@ -22,3 +22,8 @@ spring:
             descriptor:
               sql:
                 BasicBinder: TRACE
+
+  spring:
+    devtools:
+      livereload:
+        enabled=true:
