@@ -71,7 +71,7 @@ class MemberServiceTest {
         // then
     }
 
-   @Test
+    @Test
     void findMembers() {
     }
 
