@@ -1,6 +1,7 @@
 package com.woochanleee.hellospring;
 
 import com.woochanleee.hellospring.repository.JdbcMemberRepository;
+import com.woochanleee.hellospring.repository.JdbcTemplateMemberRepository;
 import com.woochanleee.hellospring.repository.MemberRepository;
 import com.woochanleee.hellospring.repository.MemoryMemberRepository;
 import com.woochanleee.hellospring.service.MemberService;
@@ -29,6 +30,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
