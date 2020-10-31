@@ -1,5 +1,6 @@
 package com.woochanleee.hellospring;
 
+import com.woochanleee.hellospring.aop.TimeTraceAop;
 import com.woochanleee.hellospring.repository.*;
 import com.woochanleee.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,20 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-//    @PersistenceContext
-    private final EntityManager entityManager;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
+
+    //    @PersistenceContext
+//    private final EntityManager entityManager;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager entityManager) {
+//        this.entityManager = entityManager;
+//    }
 
     //    private final DataSource dataSource;
 //
@@ -31,14 +39,19 @@ public class SpringConfig {
 
     @Bean
     public MemberService memberService() {
-         return new MemberService(memberRepository());
+         return new MemberService(memberRepository);
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
+//    @Bean
+//    public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
 //        return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(entityManager);
-    }
+//        return new JpaMemberRepository(entityManager);
+//    }
+
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();
+//    }
 }
